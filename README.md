@@ -21,10 +21,7 @@ The above command would tell us if the swagger yaml file is valid. If the swagge
 
 # Swagger generated files
 1. cmd*
-1. restapi/operations*
-1. restapi/doc.go
-1. restapi/embedded_spec.go
-1. restapi/server.go
+1. restapi*
 1. models*
 
 # Golang Test

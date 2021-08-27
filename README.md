@@ -5,7 +5,7 @@
 ## Microservice Explanation
 
 > Prerequisite to use swagger commands below
-https://goswagger.io/install.html - automatic!
+https://goswagger.io/install.html
 
 The code is generated on top of the go-swagger command. The go-swagger generates the cmd, models and restapi folders. However the **restapi/configure_bus_company.go** is the only go file which is modified. 
 

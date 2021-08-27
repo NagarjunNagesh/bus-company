@@ -7,7 +7,7 @@
 > Prerequisite to use swagger commands below
 https://goswagger.io/install.html
 
-The code is generated on top of the go-swagger command. The go-swagger generates the cmd, models and restapi folders. However the **restapi/configure_bus_company.go** is the only go file which is modified. 
+The code is written on top of auto generated code `go-swagger`. The `go-swagger` generates the cmd, models and restapi folders. However the **restapi/configure_bus_company.go** is the only go file which is **safe to be modified** without the fear of being overwritten. 
 
 Inorder to modify the model or API endpoints, we should just modify the **swagger.yaml** file and run the following commands.
 

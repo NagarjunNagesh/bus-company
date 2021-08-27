@@ -20,12 +20,12 @@ The above command would tell us if the swagger yaml file is valid. If the swagge
 *Note that the **restapi/configure_bus_company.go** file would not be modified by executing the above command. So it is safe to generate the swagger command as many times as necessary*
 
 # Swagger generated files
-1.cmd*
-1.restapi/operations*
-1.restapi/doc.go
-1.restapi/embedded_spec.go
-1.restapi/server.go
-1.models*
+1. cmd*
+1. restapi/operations*
+1. restapi/doc.go
+1. restapi/embedded_spec.go
+1. restapi/server.go
+1. models*
 
 # Golang Test
 

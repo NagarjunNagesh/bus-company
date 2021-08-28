@@ -25,15 +25,15 @@ type AddTrip struct {
 
 	// destination Id
 	// Required: true
-	DestinationID *float64 `json:"destinationId"`
+	DestinationID *int32 `json:"destinationId"`
 
 	// origin Id
 	// Required: true
-	OriginID *float64 `json:"originId"`
+	OriginID *int32 `json:"originId"`
 
 	// price
 	// Required: true
-	Price *float32 `json:"price"`
+	Price *float64 `json:"price"`
 }
 
 // Validate validates this add trip

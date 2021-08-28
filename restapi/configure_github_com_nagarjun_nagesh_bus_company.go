@@ -10,9 +10,13 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	addatrip "github.com/NagarjunNagesh/bus-company/domain/usecase/add-a-trip"
+	"github.com/NagarjunNagesh/bus-company/domain/usecase/fetch"
+	fetchall "github.com/NagarjunNagesh/bus-company/domain/usecase/fetch-all"
 	add_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/add"
 	get_one_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch"
 	get_all_trips_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch-all"
+	"github.com/NagarjunNagesh/bus-company/repository/trips"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations/trip"
 )
@@ -41,16 +45,24 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	trips_repo := trips.New()
+
 	api.TripAddNewTripHandler = trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
-		return add_trip_handler.AddATripHandler(params)
+		add_a_trip_us := addatrip.NewUseCase(trips_repo)
+		h := add_trip_handler.NewHandler(add_a_trip_us)
+		return h.AddATripHandler(params)
 	})
 
 	api.TripGetAllTripsHandler = trip.GetAllTripsHandlerFunc(func(params trip.GetAllTripsParams) middleware.Responder {
-		return get_all_trips_handler.FetchAllTripHandler(params)
+		fetch_all_us := fetchall.NewUseCase(trips_repo)
+		h := get_all_trips_handler.NewHandler(fetch_all_us)
+		return h.FetchAllTripHandler(params)
 	})
 
 	api.TripGetTripByIDHandler = trip.GetTripByIDHandlerFunc(func(params trip.GetTripByIDParams) middleware.Responder {
-		return get_one_trip_handler.FetchATripHandler(params)
+		fetch_uc := fetch.NewUseCase(trips_repo)
+		h := get_one_trip_handler.NewHandler(fetch_uc)
+		return h.FetchATripHandler(params)
 	})
 
 	api.PreServerShutdown = func() {}

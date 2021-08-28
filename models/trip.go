@@ -33,7 +33,7 @@ type Trip struct {
 
 	// price
 	// Required: true
-	Price *float32 `json:"price"`
+	Price *float64 `json:"price"`
 }
 
 // Validate validates this trip

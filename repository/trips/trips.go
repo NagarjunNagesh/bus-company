@@ -1,15 +1,46 @@
 package trips
 
-import "github.com/NagarjunNagesh/bus-company/domain/models/trip"
+import (
+	trip_model "github.com/NagarjunNagesh/bus-company/domain/models/trip"
+	irepository "github.com/NagarjunNagesh/bus-company/domain/repository"
+)
 
-var Trips = []trip.Trip{
-	{
-		ID:            1,
-		OriginID:      1,
-		DestinationID: 2,
-		Dates:         "Mon Tue Wed Fri",
-		Price:         40.55,
-	},
-	{ID: 2, OriginID: 2, DestinationID: 1, Dates: "Sat Sun", Price: 40.55},
-	{ID: 3, OriginID: 3, DestinationID: 6, Dates: "Mon Tue Wed Thu Fri", Price: 32.10},
+type repository struct{}
+
+func New() irepository.Trip {
+	return &repository{}
+}
+
+func (r *repository) Get(id int) (*trip_model.Trip, error) {
+	dates := "Mon Tue Wed Thurs"
+	barcelona := "Barcelona"
+	price := 40.22
+	origin := "Seville"
+	aTrip := trip_model.Trip{
+		Dates:       &dates,
+		Destination: &barcelona,
+		Origin:      &origin,
+		Price:       &price,
+	}
+	return &aTrip, nil
+}
+
+func (r *repository) GetAll() ([]*trip_model.Trip, error) {
+	dates := "Mon Tue Wed Thurs"
+	barcelona := "Barcelona"
+	price := 40.22
+	origin := "Seville"
+	aTrip := trip_model.Trip{
+		Dates:       &dates,
+		Destination: &barcelona,
+		Origin:      &origin,
+		Price:       &price,
+	}
+	trips := []*trip_model.Trip{}
+	trips = append(trips, &aTrip)
+	return trips, nil
+}
+
+func (r *repository) Create(add_trip *trip_model.AddTrip) (bool, error) {
+	return true, nil
 }

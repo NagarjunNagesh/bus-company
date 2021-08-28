@@ -115,7 +115,7 @@ definitions:
         type: "string"
       price:
         type: "number"
-        format: "float"
+        format: "float64"
   AddTrip:
     type: "object"
     required:
@@ -126,13 +126,15 @@ definitions:
     properties:
       originId:
         type: "number"
+        format: "int32"
       destinationId:
         type: "number"
+        format: "int32"
       dates:
         type: "string"
       price:
         type: "number"
-        format: "float"
+        format: "float64"
   ApiResponse:
     type: "object"
     properties:

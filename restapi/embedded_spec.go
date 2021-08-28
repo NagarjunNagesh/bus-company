@@ -162,14 +162,16 @@ func init() {
           "type": "string"
         },
         "destinationId": {
-          "type": "number"
+          "type": "number",
+          "format": "int32"
         },
         "originId": {
-          "type": "number"
+          "type": "number",
+          "format": "int32"
         },
         "price": {
           "type": "number",
-          "format": "float"
+          "format": "float64"
         }
       }
     },
@@ -208,7 +210,7 @@ func init() {
         },
         "price": {
           "type": "number",
-          "format": "float"
+          "format": "float64"
         }
       }
     },
@@ -379,14 +381,16 @@ func init() {
           "type": "string"
         },
         "destinationId": {
-          "type": "number"
+          "type": "number",
+          "format": "int32"
         },
         "originId": {
-          "type": "number"
+          "type": "number",
+          "format": "int32"
         },
         "price": {
           "type": "number",
-          "format": "float"
+          "format": "float64"
         }
       }
     },
@@ -425,7 +429,7 @@ func init() {
         },
         "price": {
           "type": "number",
-          "format": "float"
+          "format": "float64"
         }
       }
     },

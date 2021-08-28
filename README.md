@@ -1,6 +1,6 @@
 ## Start the Server
 
-`go run cmd/bus-company-server/main.go --scheme http --port=8080;`
+`go run cmd/github-com-nagarjun-nagesh-bus-company-server/main.go --scheme http --port=8080;`
 
 ## Microservice Explanation
 
@@ -15,7 +15,7 @@ Inorder to modify the model or API endpoints, we should just modify the **swagge
 
 The above command would tell us if the swagger yaml file is valid. If the swagger yaml file is valid then please proceed with the generation of the code. 
 
-`swagger generate server -A bus-company -f ./swagger.yaml`
+`swagger generate server -A github.com/NagarjunNagesh/bus-company -f ./swagger.yaml`
 
 *Note that the **restapi/configure_bus_company.go** file would not be modified by executing the above command. So it is safe to generate the swagger command as many times as necessary*
 

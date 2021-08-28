@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"bus-company/models"
+	"github.com/NagarjunNagesh/bus-company/models"
 )
 
 // NewAddNewTripParams creates a new AddNewTripParams object

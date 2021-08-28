@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"bus-company/models"
+	"github.com/NagarjunNagesh/bus-company/models"
 )
 
 // AddNewTripCreatedCode is the HTTP code returned for type AddNewTripCreated

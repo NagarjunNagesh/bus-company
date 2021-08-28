@@ -10,6 +10,9 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	add_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/add"
+	get_one_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch"
+	get_all_trips_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch-all"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations/trip"
 )
@@ -35,26 +38,20 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 	// api.UseRedoc()
 
 	api.JSONConsumer = runtime.JSONConsumer()
-	api.XMLConsumer = runtime.XMLConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()
-	api.XMLProducer = runtime.XMLProducer()
 
-	if api.TripAddNewTripHandler == nil {
-		api.TripAddNewTripHandler = trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
-			return middleware.NotImplemented("operation trip.AddNewTrip has not yet been implemented")
-		})
-	}
-	if api.TripGetAllTripsHandler == nil {
-		api.TripGetAllTripsHandler = trip.GetAllTripsHandlerFunc(func(params trip.GetAllTripsParams) middleware.Responder {
-			return middleware.NotImplemented("operation trip.GetAllTrips has not yet been implemented")
-		})
-	}
-	if api.TripGetTripByIDHandler == nil {
-		api.TripGetTripByIDHandler = trip.GetTripByIDHandlerFunc(func(params trip.GetTripByIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation trip.GetTripByID has not yet been implemented")
-		})
-	}
+	api.TripAddNewTripHandler = trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
+		return add_trip_handler.AddATripHandler(params)
+	})
+
+	api.TripGetAllTripsHandler = trip.GetAllTripsHandlerFunc(func(params trip.GetAllTripsParams) middleware.Responder {
+		return get_all_trips_handler.FetchAllTripHandler(params)
+	})
+
+	api.TripGetTripByIDHandler = trip.GetTripByIDHandlerFunc(func(params trip.GetTripByIDParams) middleware.Responder {
+		return get_one_trip_handler.FetchATripHandler(params)
+	})
 
 	api.PreServerShutdown = func() {}
 

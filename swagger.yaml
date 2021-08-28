@@ -29,7 +29,6 @@ paths:
       description: "Returns all the trips from PackAndGo"
       operationId: "getAllTrips"
       produces:
-      - "application/xml"
       - "application/json"
       responses:
         "200":
@@ -48,9 +47,7 @@ paths:
       operationId: "addNewTrip"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
@@ -76,7 +73,6 @@ paths:
       description: "Returns a single trip"
       operationId: "getTripById"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - name: "tripId"
@@ -103,8 +99,6 @@ definitions:
     type: array
     items:
         $ref: '#/definitions/Trip'
-    xml:
-      name: "Trips"
   Trip:
     type: "object"
     required:
@@ -122,8 +116,6 @@ definitions:
       price:
         type: "number"
         format: "float"
-    xml:
-      name: "Trip"
   AddTrip:
     type: "object"
     required:

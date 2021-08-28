@@ -43,7 +43,6 @@ func init() {
       "get": {
         "description": "Returns all the trips from PackAndGo",
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "tags": [
@@ -68,11 +67,9 @@ func init() {
       },
       "post": {
         "consumes": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "tags": [
@@ -111,7 +108,6 @@ func init() {
       "get": {
         "description": "Returns a single trip",
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "tags": [
@@ -214,18 +210,12 @@ func init() {
           "type": "number",
           "format": "float"
         }
-      },
-      "xml": {
-        "name": "Trip"
       }
     },
     "Trips": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/Trip"
-      },
-      "xml": {
-        "name": "Trips"
       }
     }
   },
@@ -270,8 +260,7 @@ func init() {
       "get": {
         "description": "Returns all the trips from PackAndGo",
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "tags": [
           "trip"
@@ -295,12 +284,10 @@ func init() {
       },
       "post": {
         "consumes": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "tags": [
           "trip"
@@ -338,8 +325,7 @@ func init() {
       "get": {
         "description": "Returns a single trip",
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "tags": [
           "trip"
@@ -441,18 +427,12 @@ func init() {
           "type": "number",
           "format": "float"
         }
-      },
-      "xml": {
-        "name": "Trip"
       }
     },
     "Trips": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/Trip"
-      },
-      "xml": {
-        "name": "Trips"
       }
     }
   },

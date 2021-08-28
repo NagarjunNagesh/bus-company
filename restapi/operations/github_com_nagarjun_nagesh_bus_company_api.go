@@ -41,10 +41,8 @@ func NewGithubComNagarjunNageshBusCompanyAPI(spec *loads.Document) *GithubComNag
 		BearerAuthenticator: security.BearerAuth,
 
 		JSONConsumer: runtime.JSONConsumer(),
-		XMLConsumer:  runtime.XMLConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),
-		XMLProducer:  runtime.XMLProducer(),
 
 		TripAddNewTripHandler: trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
 			return middleware.NotImplemented("operation trip.AddNewTrip has not yet been implemented")
@@ -86,16 +84,10 @@ type GithubComNagarjunNageshBusCompanyAPI struct {
 	// JSONConsumer registers a consumer for the following mime types:
 	//   - application/json
 	JSONConsumer runtime.Consumer
-	// XMLConsumer registers a consumer for the following mime types:
-	//   - application/xml
-	XMLConsumer runtime.Consumer
 
 	// JSONProducer registers a producer for the following mime types:
 	//   - application/json
 	JSONProducer runtime.Producer
-	// XMLProducer registers a producer for the following mime types:
-	//   - application/xml
-	XMLProducer runtime.Producer
 
 	// TripAddNewTripHandler sets the operation handler for the add new trip operation
 	TripAddNewTripHandler trip.AddNewTripHandler
@@ -175,15 +167,9 @@ func (o *GithubComNagarjunNageshBusCompanyAPI) Validate() error {
 	if o.JSONConsumer == nil {
 		unregistered = append(unregistered, "JSONConsumer")
 	}
-	if o.XMLConsumer == nil {
-		unregistered = append(unregistered, "XMLConsumer")
-	}
 
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
-	}
-	if o.XMLProducer == nil {
-		unregistered = append(unregistered, "XMLProducer")
 	}
 
 	if o.TripAddNewTripHandler == nil {
@@ -226,8 +212,6 @@ func (o *GithubComNagarjunNageshBusCompanyAPI) ConsumersFor(mediaTypes []string)
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONConsumer
-		case "application/xml":
-			result["application/xml"] = o.XMLConsumer
 		}
 
 		if c, ok := o.customConsumers[mt]; ok {
@@ -245,8 +229,6 @@ func (o *GithubComNagarjunNageshBusCompanyAPI) ProducersFor(mediaTypes []string)
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONProducer
-		case "application/xml":
-			result["application/xml"] = o.XMLProducer
 		}
 
 		if p, ok := o.customProducers[mt]; ok {

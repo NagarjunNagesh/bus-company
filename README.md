@@ -1,6 +1,7 @@
 ## Start the Server
 
 `go build -o main cmd/github-com-nagarjun-nagesh-bus-company-server/main.go`
+
 `go run cmd/github-com-nagarjun-nagesh-bus-company-server/main.go --scheme http --port=8080;`
 
 ## Microservice Explanation

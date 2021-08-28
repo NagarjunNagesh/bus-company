@@ -1,8 +1,10 @@
 package trips
 
-import "github.com/NagarjunNagesh/bus-company/domain/models/trip"
+import (
+	"github.com/NagarjunNagesh/bus-company/domain/models/trip"
+)
 
-var Trips = []trip.AddTrip{
+var Trips = []*trip.AddTrip{
 	{
 		ID:            1,
 		OriginID:      1,

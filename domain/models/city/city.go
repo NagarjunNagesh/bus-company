@@ -1,6 +1,6 @@
 package city
 
 type City struct {
-	id   int32
-	name string
+	ID   int32
+	Name string
 }

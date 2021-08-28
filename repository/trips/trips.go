@@ -7,7 +7,7 @@ import (
 
 type repository struct{}
 
-func New() irepository.Trip {
+func New() irepository.TripRepository {
 	return &repository{}
 }
 

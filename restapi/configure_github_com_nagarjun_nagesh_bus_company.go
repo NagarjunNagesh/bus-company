@@ -5,17 +5,20 @@ package restapi
 import (
 	"crypto/tls"
 	"net/http"
+	"time"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"github.com/NagarjunNagesh/bus-company/config"
 	addatrip "github.com/NagarjunNagesh/bus-company/domain/usecase/add-a-trip"
 	"github.com/NagarjunNagesh/bus-company/domain/usecase/fetch"
 	fetchall "github.com/NagarjunNagesh/bus-company/domain/usecase/fetch-all"
 	add_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/add"
 	get_one_trip_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch"
 	get_all_trips_handler "github.com/NagarjunNagesh/bus-company/handler/trip/fetch-all"
+	"github.com/NagarjunNagesh/bus-company/repository/city"
 	"github.com/NagarjunNagesh/bus-company/repository/trips"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations"
 	"github.com/NagarjunNagesh/bus-company/restapi/operations/trip"
@@ -46,6 +49,7 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 	api.JSONProducer = runtime.JSONProducer()
 
 	trips_repo := trips.New()
+	city_repo := city.New()
 
 	api.TripAddNewTripHandler = trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
 		add_a_trip_us := addatrip.NewUseCase(trips_repo)
@@ -65,11 +69,24 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 		return h.FetchATripHandler(params)
 	})
 
+	// Read The City file every X seconds
+	go executeFuncForDefinedTime(func() {
+		city_repo.PopulateCities()
+	})
+
 	api.PreServerShutdown = func() {}
 
 	api.ServerShutdown = func() {}
 
 	return setupGlobalMiddleware(api.Serve(setupMiddlewares))
+}
+
+func executeFuncForDefinedTime(fun func()) {
+	reloadInterval := time.Duration(config.ReloadTime) * time.Second
+	tick := time.NewTicker(reloadInterval)
+	for range tick.C {
+		fun()
+	}
 }
 
 // The TLS configuration before HTTPS server starts.

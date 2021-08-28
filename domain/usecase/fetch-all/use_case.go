@@ -6,10 +6,10 @@ import (
 )
 
 type usecase struct {
-	trip_repo repository.Trip
+	trip_repo repository.TripRepository
 }
 
-func NewUseCase(trip_repo repository.Trip) UseCase {
+func NewUseCase(trip_repo repository.TripRepository) UseCase {
 	return &usecase{trip_repo: trip_repo}
 }
 

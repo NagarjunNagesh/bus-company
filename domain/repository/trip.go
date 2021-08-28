@@ -5,7 +5,7 @@ import (
 )
 
 type TripRepository interface {
-	Get(id int) (*trip_model.Trip, error)
+	Get(id int32) (*trip_model.Trip, error)
 	GetAll() ([]*trip_model.Trip, error)
 	Create(add_trip *trip_model.AddTrip) (bool, error)
 }

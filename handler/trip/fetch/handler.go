@@ -43,7 +43,7 @@ func return200(tripEntity *trip_entity.Trip) (bool, middleware.Responder) {
 func return404() middleware.Responder {
 	apiResponse := models.APIResponse{
 		Code:    404,
-		Message: "Unable to fetch a trip",
+		Message: "trip does not exist",
 		Type:    "JSON",
 	}
 	return trip.NewGetAllTripsNotFound().WithPayload(&apiResponse)

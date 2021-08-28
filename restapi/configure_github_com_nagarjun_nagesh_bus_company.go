@@ -48,8 +48,8 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	trips_repo := trips.New()
 	city_repo := city.New()
+	trips_repo := trips.New(city_repo)
 
 	api.TripAddNewTripHandler = trip.AddNewTripHandlerFunc(func(params trip.AddNewTripParams) middleware.Responder {
 		add_a_trip_us := addatrip.NewUseCase(trips_repo)
@@ -82,6 +82,10 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 }
 
 func executeFuncForDefinedTime(fun func()) {
+	// Execute the function once
+	fun()
+
+	// Then relaunch the function every x seconds
 	reloadInterval := time.Duration(config.ReloadTime) * time.Second
 	tick := time.NewTicker(reloadInterval)
 	for range tick.C {

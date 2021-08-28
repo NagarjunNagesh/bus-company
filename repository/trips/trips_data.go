@@ -16,4 +16,4 @@ var Trips = []*trip.AddTrip{
 	{ID: 3, OriginID: 3, DestinationID: 6, Dates: "Mon Tue Wed Thu Fri", Price: 32.10},
 }
 
-var TripIDCounter = 4
+var TripIDCounter = int32(4)

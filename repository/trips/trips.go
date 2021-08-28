@@ -1,46 +1,53 @@
 package trips
 
 import (
+	"errors"
+
 	trip_model "github.com/NagarjunNagesh/bus-company/domain/models/trip"
 	irepository "github.com/NagarjunNagesh/bus-company/domain/repository"
 )
 
-type repository struct{}
-
-func New() irepository.TripRepository {
-	return &repository{}
+type repository struct {
+	city_repo irepository.CityRepository
 }
 
-func (r *repository) Get(id int) (*trip_model.Trip, error) {
-	dates := "Mon Tue Wed Thurs"
-	barcelona := "Barcelona"
-	price := 40.22
-	origin := "Seville"
-	aTrip := trip_model.Trip{
-		Dates:       &dates,
-		Destination: &barcelona,
-		Origin:      &origin,
-		Price:       &price,
+func New(city_repo irepository.CityRepository) irepository.TripRepository {
+	return &repository{city_repo: city_repo}
+}
+
+func (r *repository) Get(id int32) (*trip_model.Trip, error) {
+	var aTrip trip_model.Trip
+	for _, t := range Trips {
+		if t.ID == id {
+			aTrip.Dates = &t.Dates
+			aTrip.Destination, _ = r.city_repo.FindCity(t.DestinationID)
+			aTrip.Origin, _ = r.city_repo.FindCity(t.OriginID)
+			aTrip.Price = &t.Price
+			return &aTrip, nil
+		}
 	}
-	return &aTrip, nil
+
+	e := errors.New("no content")
+	return nil, e
 }
 
 func (r *repository) GetAll() ([]*trip_model.Trip, error) {
-	dates := "Mon Tue Wed Thurs"
-	barcelona := "Barcelona"
-	price := 40.22
-	origin := "Seville"
-	aTrip := trip_model.Trip{
-		Dates:       &dates,
-		Destination: &barcelona,
-		Origin:      &origin,
-		Price:       &price,
-	}
 	trips := []*trip_model.Trip{}
-	trips = append(trips, &aTrip)
+	for _, t := range Trips {
+		var aTrip trip_model.Trip
+		aTrip.Dates = &t.Dates
+		aTrip.Destination, _ = r.city_repo.FindCity(t.DestinationID)
+		aTrip.Origin, _ = r.city_repo.FindCity(t.OriginID)
+		aTrip.Price = &t.Price
+		trips = append(trips, &aTrip)
+	}
 	return trips, nil
 }
 
 func (r *repository) Create(add_trip *trip_model.AddTrip) (bool, error) {
+	add_trip.ID = TripIDCounter
+	Trips = append(Trips, add_trip)
+
+	TripIDCounter++
 	return true, nil
 }

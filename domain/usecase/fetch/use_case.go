@@ -14,6 +14,6 @@ func NewUseCase(trip_repo repository.TripRepository) UseCase {
 }
 
 func (uc *usecase) FetchOneTrip(tripID int64) *trip_model.Trip {
-	trip, _ := uc.trip_repo.Get(int(tripID))
+	trip, _ := uc.trip_repo.Get(int32(tripID))
 	return trip
 }

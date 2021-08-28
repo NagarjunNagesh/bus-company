@@ -7,7 +7,6 @@
 //    http://swagger.io/terms/
 //  Schemes:
 //    http
-//    https
 //  Host: packandgo.com
 //  BasePath: /v1
 //  Version: 1.0.0

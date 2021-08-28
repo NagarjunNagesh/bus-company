@@ -2,6 +2,7 @@ package city
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -17,7 +18,7 @@ func New() irepository.CityRepository {
 }
 
 func (r *repository) PopulateCities() {
-	file, err := os.Open("repository/city/cities.txt")
+	file, err := os.Open("resources/cities.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,15 +28,32 @@ func (r *repository) PopulateCities() {
 	i := int32(1)
 	// optionally, resize scanner's capacity for lines over 64K, see next example
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
 		aCity := city.City{
 			ID:   i,
 			Name: scanner.Text(),
 		}
 		Cities = append(Cities, &aCity)
+		fmt.Println(aCity)
+		i++
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func (r *repository) FindCity(id int32) (*string, error) {
+	var city string
+	for _, c := range Cities {
+		if c.ID == id {
+			city = c.Name
+		}
+	}
+
+	if len(city) == 0 {
+		e := errors.New("no content")
+		return nil, e
+	}
+
+	return &city, nil
 }

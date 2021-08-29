@@ -28,10 +28,10 @@ func (r *repository) Get(id int32) (*trip_model.Trip, error) {
 			aTrip.Price = &t.Price
 
 			if eOrigin != nil {
-				e := fmt.Errorf("cannot find origin city for %d", id)
+				e := fmt.Errorf("cannot find origin city for the trip id %d", id)
 				return nil, e
 			} else if eDestination != nil {
-				e := fmt.Errorf("cannot find destination city for %d", id)
+				e := fmt.Errorf("cannot find destination city for the trip id %d", id)
 				return nil, e
 			}
 
@@ -55,10 +55,10 @@ func (r *repository) GetAll() ([]*trip_model.Trip, error) {
 		aTrip.Price = &t.Price
 
 		if eOrigin != nil {
-			e := fmt.Errorf("cannot find origin city for the trip %d", t.ID)
+			e := fmt.Errorf("cannot find origin city for the trip with id %d", t.ID)
 			return nil, e
 		} else if eDestination != nil {
-			e := fmt.Errorf("cannot find destination city for the trip %d", t.ID)
+			e := fmt.Errorf("cannot find destination city for the trip with id %d", t.ID)
 			return nil, e
 		}
 

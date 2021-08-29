@@ -20,8 +20,12 @@ func NewUseCase(trip_repo repository.TripRepository) UseCase {
 }
 
 func (uc *usecase) AddATrip(tripModel *trip_model.AddTrip) (bool, error) {
-	isNotValidDate := hasInvalidDates(tripModel.Dates)
+	if tripModel.DestinationID == tripModel.OriginID {
+		e := errors.New("destination id cannot be the same as origin id")
+		return false, e
+	}
 
+	isNotValidDate := hasInvalidDates(tripModel.Dates)
 	if isNotValidDate {
 		e := errors.New("invalid date value. Should be one of 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'")
 		return false, e

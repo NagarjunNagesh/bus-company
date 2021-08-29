@@ -2,6 +2,7 @@ package trips
 
 import (
 	"errors"
+	"fmt"
 
 	trip_model "github.com/NagarjunNagesh/bus-company/domain/models/trip"
 	irepository "github.com/NagarjunNagesh/bus-company/domain/repository"
@@ -17,12 +18,23 @@ func New(city_repo irepository.CityRepository) irepository.TripRepository {
 
 func (r *repository) Get(id int32) (*trip_model.Trip, error) {
 	var aTrip trip_model.Trip
+	var eDestination, eOrigin error
+
 	for _, t := range Trips {
 		if t.ID == id {
 			aTrip.Dates = &t.Dates
-			aTrip.Destination, _ = r.city_repo.FindCity(t.DestinationID)
-			aTrip.Origin, _ = r.city_repo.FindCity(t.OriginID)
+			aTrip.Destination, eDestination = r.city_repo.FindCity(t.DestinationID)
+			aTrip.Origin, eOrigin = r.city_repo.FindCity(t.OriginID)
 			aTrip.Price = &t.Price
+
+			if eOrigin != nil {
+				e := fmt.Errorf("cannot find origin city for %d", id)
+				return nil, e
+			} else if eDestination != nil {
+				e := fmt.Errorf("cannot find destination city for %d", id)
+				return nil, e
+			}
+
 			return &aTrip, nil
 		}
 	}
@@ -33,12 +45,23 @@ func (r *repository) Get(id int32) (*trip_model.Trip, error) {
 
 func (r *repository) GetAll() ([]*trip_model.Trip, error) {
 	trips := []*trip_model.Trip{}
+	var eDestination, eOrigin error
+
 	for _, t := range Trips {
 		var aTrip trip_model.Trip
 		aTrip.Dates = &t.Dates
-		aTrip.Destination, _ = r.city_repo.FindCity(t.DestinationID)
-		aTrip.Origin, _ = r.city_repo.FindCity(t.OriginID)
+		aTrip.Destination, eDestination = r.city_repo.FindCity(t.DestinationID)
+		aTrip.Origin, eOrigin = r.city_repo.FindCity(t.OriginID)
 		aTrip.Price = &t.Price
+
+		if eOrigin != nil {
+			e := fmt.Errorf("cannot find origin city for the trip %d", t.ID)
+			return nil, e
+		} else if eDestination != nil {
+			e := fmt.Errorf("cannot find destination city for the trip %d", t.ID)
+			return nil, e
+		}
+
 		trips = append(trips, &aTrip)
 	}
 	return trips, nil

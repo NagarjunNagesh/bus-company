@@ -13,9 +13,10 @@ func Test_usecase_FetchAllTrips(t *testing.T) {
 		trip_repo repository.TripRepository
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		want   []*trip_model.Trip
+		name    string
+		fields  fields
+		want    []*trip_model.Trip
+		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
@@ -24,7 +25,12 @@ func Test_usecase_FetchAllTrips(t *testing.T) {
 			uc := &usecase{
 				trip_repo: tt.fields.trip_repo,
 			}
-			if got := uc.FetchAllTrips(); !reflect.DeepEqual(got, tt.want) {
+			got, err := uc.FetchAllTrips()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("usecase.FetchAllTrips() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("usecase.FetchAllTrips() = %v, want %v", got, tt.want)
 			}
 		})

@@ -13,7 +13,7 @@ func NewUseCase(trip_repo repository.TripRepository) UseCase {
 	return &usecase{trip_repo: trip_repo}
 }
 
-func (uc *usecase) FetchAllTrips() []*trip_model.Trip {
-	trips, _ := uc.trip_repo.GetAll()
-	return trips
+func (uc *usecase) FetchAllTrips() ([]*trip_model.Trip, error) {
+	trips, err := uc.trip_repo.GetAll()
+	return trips, err
 }

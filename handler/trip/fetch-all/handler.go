@@ -17,7 +17,10 @@ func NewHandler(fetch_all_trips_uc fetch_all_trips.UseCase) RestHandler {
 }
 
 func (h *restHandler) FetchAllTripHandler(params trip.GetAllTripsParams) middleware.Responder {
-	trips := h.fetch_all_trips_uc.FetchAllTrips()
+	trips, err := h.fetch_all_trips_uc.FetchAllTrips()
+	if err != nil {
+		return return400()
+	}
 
 	shouldReturn, returnValue := return404(trips)
 	if shouldReturn {
@@ -51,4 +54,13 @@ func return404(trips []*trip_entity.Trip) (bool, middleware.Responder) {
 		return true, trip.NewGetAllTripsNotFound().WithPayload(&apiResponse)
 	}
 	return false, nil
+}
+
+func return400() middleware.Responder {
+	apiResponse := models.APIResponse{
+		Code:    404,
+		Message: "Unable to fetch all the trips",
+		Type:    "JSON",
+	}
+	return trip.NewGetAllTripsBadRequest().WithPayload(&apiResponse)
 }

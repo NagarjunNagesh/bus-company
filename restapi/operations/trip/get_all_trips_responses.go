@@ -60,6 +60,50 @@ func (o *GetAllTripsOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 	}
 }
 
+// GetAllTripsBadRequestCode is the HTTP code returned for type GetAllTripsBadRequest
+const GetAllTripsBadRequestCode int = 400
+
+/*GetAllTripsBadRequest Bad Request
+
+swagger:response getAllTripsBadRequest
+*/
+type GetAllTripsBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.APIResponse `json:"body,omitempty"`
+}
+
+// NewGetAllTripsBadRequest creates GetAllTripsBadRequest with default headers values
+func NewGetAllTripsBadRequest() *GetAllTripsBadRequest {
+
+	return &GetAllTripsBadRequest{}
+}
+
+// WithPayload adds the payload to the get all trips bad request response
+func (o *GetAllTripsBadRequest) WithPayload(payload *models.APIResponse) *GetAllTripsBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get all trips bad request response
+func (o *GetAllTripsBadRequest) SetPayload(payload *models.APIResponse) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *GetAllTripsBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // GetAllTripsNotFoundCode is the HTTP code returned for type GetAllTripsNotFound
 const GetAllTripsNotFoundCode int = 404
 

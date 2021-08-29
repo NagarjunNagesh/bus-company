@@ -56,6 +56,12 @@ func init() {
               "$ref": "#/definitions/Trips"
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
           "404": {
             "description": "No trips found",
             "schema": {
@@ -278,6 +284,12 @@ func init() {
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/Trips"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
             }
           },
           "404": {

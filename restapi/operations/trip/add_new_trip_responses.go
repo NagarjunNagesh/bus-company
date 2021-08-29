@@ -57,6 +57,50 @@ func (o *AddNewTripCreated) WriteResponse(rw http.ResponseWriter, producer runti
 	}
 }
 
+// AddNewTripBadRequestCode is the HTTP code returned for type AddNewTripBadRequest
+const AddNewTripBadRequestCode int = 400
+
+/*AddNewTripBadRequest Bad Request
+
+swagger:response addNewTripBadRequest
+*/
+type AddNewTripBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.APIResponse `json:"body,omitempty"`
+}
+
+// NewAddNewTripBadRequest creates AddNewTripBadRequest with default headers values
+func NewAddNewTripBadRequest() *AddNewTripBadRequest {
+
+	return &AddNewTripBadRequest{}
+}
+
+// WithPayload adds the payload to the add new trip bad request response
+func (o *AddNewTripBadRequest) WithPayload(payload *models.APIResponse) *AddNewTripBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the add new trip bad request response
+func (o *AddNewTripBadRequest) SetPayload(payload *models.APIResponse) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *AddNewTripBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // AddNewTripMethodNotAllowedCode is the HTTP code returned for type AddNewTripMethodNotAllowed
 const AddNewTripMethodNotAllowedCode int = 405
 

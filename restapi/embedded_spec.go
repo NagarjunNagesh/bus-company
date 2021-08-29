@@ -94,6 +94,12 @@ func init() {
               "$ref": "#/definitions/ApiResponse"
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
           "405": {
             "description": "Invalid input",
             "schema": {
@@ -308,6 +314,12 @@ func init() {
         "responses": {
           "201": {
             "description": "Successfully created the trip",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }

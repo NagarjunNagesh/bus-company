@@ -15,10 +15,11 @@ func Test_usecase_AddATrip(t *testing.T) {
 		tripModel *trip_model.AddTrip
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
-		want   bool
+		name    string
+		fields  fields
+		args    args
+		want    bool
+		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
@@ -27,7 +28,12 @@ func Test_usecase_AddATrip(t *testing.T) {
 			uc := &usecase{
 				trip_repo: tt.fields.trip_repo,
 			}
-			if got := uc.AddATrip(tt.args.tripModel); got != tt.want {
+			got, err := uc.AddATrip(tt.args.tripModel)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("usecase.AddATrip() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
 				t.Errorf("usecase.AddATrip() = %v, want %v", got, tt.want)
 			}
 		})

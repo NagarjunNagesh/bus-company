@@ -29,10 +29,14 @@ func (h *restHandler) AddATripHandler(params trip.AddNewTripParams) middleware.R
 		Type:    "JSON",
 	}
 
-	isAddedSuccessfully := h.add_a_trip_uc.AddATrip(&tripModel)
+	isAddedSuccessfully, e := h.add_a_trip_uc.AddATrip(&tripModel)
 	if isAddedSuccessfully {
 		apiResponse.Code = 201
 		return trip.NewAddNewTripCreated().WithPayload(&apiResponse)
+	} else if e != nil {
+		apiResponse.Code = 400
+		apiResponse.Message = e.Error()
+		return trip.NewAddNewTripBadRequest().WithPayload(&apiResponse)
 	}
 
 	return return404(apiResponse)

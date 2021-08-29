@@ -6,7 +6,7 @@
 
 ## Architecture
 
-TODO
+![alt text](https://github.com/NagarjunNagesh/bus-company/blob/main/resources/readme/High%20Level%20Architecture.png)
 
 ### Read File City
 

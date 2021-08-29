@@ -68,7 +68,7 @@ func Test_restHandler_AddATripHandler(t *testing.T) {
 	}
 	t4ApiResponse := models.APIResponse{
 		Code:    400,
-		Message: "invalid date value. Should be one of 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'",
+		Message: "invalid date value or repeated dates 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'",
 		Type:    "JSON",
 	}
 	type fields struct {

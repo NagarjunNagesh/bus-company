@@ -26,7 +26,7 @@ func (uc *usecase) AddATrip(tripModel *trip_model.AddTrip) (bool, error) {
 
 	isNotValidDate := hasInvalidDates(tripModel.Dates)
 	if isNotValidDate {
-		e := errors.New("invalid date value. Should be one of 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'")
+		e := errors.New("invalid date value or repeated dates 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'")
 		return false, e
 	}
 
@@ -40,9 +40,11 @@ func hasInvalidDates(dateAsString string) bool {
 
 	for _, value := range allDates {
 		if !exists[value] {
-			fmt.Printf("The date value %s is invalid\n", value)
+			fmt.Printf("The date value %s is invalid / repeated \n", value)
 			return true
 		}
+		// Find Repeated values
+		exists[value] = false
 	}
 	return false
 }

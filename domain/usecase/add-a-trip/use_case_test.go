@@ -100,8 +100,25 @@ func Test_usecase_AddATrip(t *testing.T) {
 				tripModel: &trip_model.AddTrip{
 					ID:            1,
 					OriginID:      2,
-					DestinationID: 2,
+					DestinationID: 3,
 					Dates:         "Suns",
+					Price:         20.33,
+				},
+			},
+			want:    false,
+			wantErr: true,
+		},
+		{
+			name: "Repeated Dates",
+			fields: fields{
+				trip_repo: trips_repo,
+			},
+			args: args{
+				tripModel: &trip_model.AddTrip{
+					ID:            1,
+					OriginID:      2,
+					DestinationID: 3,
+					Dates:         "Sun Sun",
 					Price:         20.33,
 				},
 			},

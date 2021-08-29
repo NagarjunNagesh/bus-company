@@ -101,7 +101,7 @@ func Test_usecase_AddATrip(t *testing.T) {
 					ID:            1,
 					OriginID:      2,
 					DestinationID: 2,
-					Dates:         "Sun",
+					Dates:         "Suns",
 					Price:         20.33,
 				},
 			},

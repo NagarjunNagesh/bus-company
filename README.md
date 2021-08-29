@@ -32,6 +32,12 @@ Keeping the high level component clean and independent of the low level componen
 
 `go run cmd/github-com-nagarjun-nagesh-bus-company-server/main.go --scheme http --port=8080;`
 
+### Base URL
+
+The base url for the packandgo server is as follows:
+
+`localhost:8080/v1/`
+
 ## Low Level Architecture
 
 ### Cities Architecture

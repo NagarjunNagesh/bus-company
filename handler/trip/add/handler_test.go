@@ -50,7 +50,7 @@ func Test_restHandler_AddATripHandler(t *testing.T) {
 	t1OriginID, t1DestinationID, t1Dates, t1Price := int32(6), int32(5), "Mon Tue", 40.33
 	t2OriginID, t2DestinationID, t2Dates, t2Price := int32(6), int32(7), "Mon Tue", 40.33
 	t3OriginID, t3DestinationID, t3Dates, t3Price := int32(7), int32(5), "Mon Tue", 40.33
-	t4OriginID, t4DestinationID, t4Dates, t4Price := int32(2), int32(5), "Mon Sat", 40.33
+	t4OriginID, t4DestinationID, t4Dates, t4Price := int32(2), int32(5), "Mon Sats", 40.33
 	apiResponse := models.APIResponse{
 		Code:    201,
 		Message: "Successfully created a new trip",

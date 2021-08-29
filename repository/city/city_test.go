@@ -2,35 +2,72 @@ package city
 
 import (
 	"testing"
+
+	"github.com/NagarjunNagesh/bus-company/domain/models/city"
 )
 
-func Test_repository_PopulateCities(t *testing.T) {
-	tests := []struct {
-		name string
-		r    *repository
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			r := &repository{}
-			r.PopulateCities()
-		})
+var barce = "Barcelona"
+
+func setup() {
+	Cities = []*city.City{
+		{
+			ID:   1,
+			Name: barce,
+		},
+		{
+			ID:   2,
+			Name: "Seville",
+		},
+		{
+			ID:   3,
+			Name: "Madrid",
+		},
+		{
+			ID:   4,
+			Name: "Valencia",
+		},
+		{
+			ID:   5,
+			Name: "Andorra la Vella",
+		},
+		{
+			ID:   6,
+			Name: "Malaga",
+		},
 	}
 }
 
 func Test_repository_FindCity(t *testing.T) {
+	setup()
 	type args struct {
 		id int32
 	}
-	tests := []struct {
+	type testCases struct {
 		name    string
 		r       *repository
 		args    args
 		want    *string
 		wantErr bool
-	}{
-		// TODO: Add test cases.
+	}
+	tests := []testCases{
+		{
+			name: "FindData",
+			r:    &repository{},
+			args: args{
+				id: 1,
+			},
+			want:    &barce,
+			wantErr: false,
+		},
+		{
+			name: "FindData",
+			r:    &repository{},
+			args: args{
+				id: 7,
+			},
+			want:    nil,
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -40,7 +77,7 @@ func Test_repository_FindCity(t *testing.T) {
 				t.Errorf("repository.FindCity() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if got != tt.want {
+			if err == nil && *got != *tt.want {
 				t.Errorf("repository.FindCity() = %v, want %v", got, tt.want)
 			}
 		})

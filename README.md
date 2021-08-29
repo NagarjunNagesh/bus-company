@@ -105,6 +105,8 @@ The above command would tell us if the swagger yaml file is valid. If the swagge
 
 We are PackAndGo, a small bus company. We want to create a REST API that helps us manage the trips that we offer.
 
+`go test ./...`
+
 ## Goal
 
 Your goal is to **build a REST API** with the following characteristics:

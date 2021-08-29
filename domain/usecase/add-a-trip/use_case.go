@@ -19,6 +19,11 @@ func NewUseCase(trip_repo repository.TripRepository) UseCase {
 }
 
 func (uc *usecase) AddATrip(tripModel *trip_model.AddTrip) (bool, error) {
+	if tripModel.Price <= 0 {
+		e := errors.New("the price of a trip cannot be zero or less")
+		return false, e
+	}
+
 	if tripModel.DestinationID == tripModel.OriginID {
 		e := errors.New("destination id cannot be the same as origin id")
 		return false, e

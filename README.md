@@ -88,6 +88,7 @@ The cities and the dates would have to be valid inorder to be added.
 1. The dates would have only contains these values seperated by comma `'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'` else it would throw an error `invalid date value or repeated dates 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'`
 1. The dates should not contain repeated values else it throws the same error as above.
 1. The Origin ID and the Destination ID being the same would thrown an error `destination id cannot be the same as origin id`
+1. Price should be greater than 0 else it would throw an error `the price of a trip cannot be zero or less`
 
 *Inorder for the city to be valid, The cities text file would have to be non empty and the number is the line number present in the city text file.*
 

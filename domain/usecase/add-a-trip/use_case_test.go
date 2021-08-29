@@ -125,6 +125,40 @@ func Test_usecase_AddATrip(t *testing.T) {
 			want:    false,
 			wantErr: true,
 		},
+		{
+			name: "Price is 0 Error",
+			fields: fields{
+				trip_repo: trips_repo,
+			},
+			args: args{
+				tripModel: &trip_model.AddTrip{
+					ID:            1,
+					OriginID:      2,
+					DestinationID: 3,
+					Dates:         "Sun",
+					Price:         0,
+				},
+			},
+			want:    false,
+			wantErr: true,
+		},
+		{
+			name: "Price is -1 Error",
+			fields: fields{
+				trip_repo: trips_repo,
+			},
+			args: args{
+				tripModel: &trip_model.AddTrip{
+					ID:            1,
+					OriginID:      2,
+					DestinationID: 3,
+					Dates:         "Sun",
+					Price:         -1,
+				},
+			},
+			want:    false,
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

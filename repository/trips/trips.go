@@ -45,6 +45,18 @@ func (r *repository) GetAll() ([]*trip_model.Trip, error) {
 }
 
 func (r *repository) Create(add_trip *trip_model.AddTrip) (bool, error) {
+	destinationCityFound, eDestination := r.city_repo.FindCity(add_trip.DestinationID)
+	if len(*destinationCityFound) == 0 || eDestination != nil {
+		e := errors.New("destination city invalid")
+		return false, e
+	} 
+	
+	originCityFound, eOrigin := r.city_repo.FindCity(add_trip.OriginID)
+	if len(*originCityFound) == 0 || eOrigin != nil {
+		e := errors.New("origin city invalid")
+		return false, e
+	}
+
 	add_trip.ID = TripIDCounter
 	Trips = append(Trips, add_trip)
 

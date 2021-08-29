@@ -27,8 +27,8 @@ func (uc *usecase) AddATrip(tripModel *trip_model.AddTrip) (bool, error) {
 		return false, e
 	}
 
-	hasCreated, _ := uc.trip_repo.Create(tripModel)
-	return hasCreated, nil
+	hasCreated, err := uc.trip_repo.Create(tripModel)
+	return hasCreated, err
 }
 
 func hasInvalidDates(dateAsString string) bool {

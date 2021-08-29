@@ -71,7 +71,7 @@ It makes the layers independant and maintainable. We can swap the repository lay
 
 ### Add Trips
 
-The cities would have to be valid inorder to be added. 
+The cities and the dates would have to be valid inorder to be added. 
 
 1. The origin city would have to be valid, else it would throw an error `origin city invalid`
 1. The destination city would have to be valid, else it would throw an error `destination city invalid`

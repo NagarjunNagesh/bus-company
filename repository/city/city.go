@@ -47,13 +47,10 @@ func (r *repository) FindCity(id int32) (*string, error) {
 	for _, c := range Cities {
 		if c.ID == id {
 			city = c.Name
+			return &city, nil
 		}
 	}
 
-	if len(city) == 0 {
-		e := errors.New("no content")
-		return nil, e
-	}
-
-	return &city, nil
+	e := errors.New("no content")
+	return nil, e
 }

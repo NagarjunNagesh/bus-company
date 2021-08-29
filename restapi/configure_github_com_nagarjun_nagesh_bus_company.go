@@ -70,9 +70,9 @@ func configureAPI(api *operations.GithubComNagarjunNageshBusCompanyAPI) http.Han
 	})
 
 	// Read The City file every X seconds
-	/*go executeFuncForDefinedTime(func() {
+	go executeFuncForDefinedTime(func() {
 		city_repo.PopulateCities()
-	})*/
+	})
 
 	api.PreServerShutdown = func() {}
 
